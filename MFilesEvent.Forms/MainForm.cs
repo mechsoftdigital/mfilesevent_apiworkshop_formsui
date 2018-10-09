@@ -180,7 +180,8 @@ namespace MFilesEvent.Forms
 
         private void btnUser_Click(object sender, EventArgs e)
         {
-
+            var frm = new UserForm(_loggedInVault.SessionInfo.AccountName, _loggedInVault.Name);
+            frm.ShowDialog();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)

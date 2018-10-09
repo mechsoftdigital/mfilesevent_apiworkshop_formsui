@@ -13,9 +13,12 @@ namespace MFilesEvent.Forms
     public partial class UserForm : Form
     {
 
-        public UserForm()
+        public UserForm(string username, string vaultname)
         {
             InitializeComponent();
+
+            this.label1.Text = username;
+            this.label4.Text = vaultname;
         }
     }
 }
