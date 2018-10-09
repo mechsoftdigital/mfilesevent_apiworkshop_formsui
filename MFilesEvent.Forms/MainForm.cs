@@ -161,7 +161,51 @@ namespace MFilesEvent.Forms
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            //Select file with dialog
+            var opn = new OpenFileDialog();
+            opn.Multiselect = false;
 
+
+            if (opn.ShowDialog() == DialogResult.OK)
+            {
+
+                Cursor = Cursors.WaitCursor;
+
+                var fName = Path.GetFileNameWithoutExtension(opn.FileName);
+                var extension = Path.GetExtension(opn.FileName).Replace(".", "");
+
+                //Set files
+                var sfds = new SourceObjectFiles();
+                sfds.AddFile(fName, extension, opn.FileName);
+
+                //Create Title
+                var tv = new TypedValue();
+                tv.SetValue(MFDataType.MFDatatypeText, fName);
+
+                //Set creation info details
+                var cr = new ObjectCreationInfo();
+                cr.SetMetadataCardTitle(fName);
+                cr.SetObjectType(0, false);
+                cr.SetSingleFileDocument(true, false);
+                cr.SetSourceFiles(sfds);
+                cr.DisallowTemplateSelection = true;
+                cr.SetExtension(extension, false);
+                cr.SetTitle(tv, false);
+
+                //Show M-Files Dialog
+                var result = _loggedInVault.ObjectOperations.ShowNewObjectWindow(this.Handle, MFObjectWindowMode.MFObjectWindowModeInsertSourceFiles, cr);
+
+                if (result.Result != MFObjectWindowResultCode.MFObjectWindowResultCodeCancel)
+                {
+                    //Check In the object & files
+                    _loggedInVault.ObjectOperations.CheckIn(result.ObjVer);
+
+                    //Reload documents list.
+                    LoadDocuments();
+                }
+
+                Cursor = Cursors.Default;
+            }
         }
     }
 }
