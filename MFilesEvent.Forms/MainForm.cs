@@ -88,7 +88,39 @@ namespace MFilesEvent.Forms
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            if (textBox1.Text.Trim() != "")
+            {
 
+                listView1.Items.Clear();
+
+                int count = 0;
+
+                //Perform quick search
+                _loggedInVault
+                    .ObjectSearchOperations
+                    .SearchForObjectsByString(textBox1.Text, false, MFFullTextSearchFlags.MFFullTextSearchFlagsLookInMetaData | MFFullTextSearchFlags.MFFullTextSearchFlagsLookInFileData)
+                    .Cast<ObjectVersion>()
+                    .Where(x => x.ObjVer.Type == 0) //Select only documents :(
+                    .OrderByDescending(x => x.ObjVer.ID)
+                    .ToList()
+                    .ForEach(x =>
+                    {
+                        //Check for files
+                        if (x.Files.Count > 0 && x.SingleFile)
+                        {
+                            var firstFile = x.Files[1];
+
+                            //Poulate listview items
+                            var lvItem = new ListViewItem(new string[] { $"{firstFile.Title}.{firstFile.Extension}", "Document" });
+                            lvItem.Tag = new SimpleInfo { Id = x.ObjVer.ID, Type = x.ObjVer.Type };
+
+                            listView1.Items.Add(lvItem);
+                            count++;
+                        }
+                    });
+
+                lblCount.Text = count.ToString();
+            }
         }
 
         private void btnNew_Click(object sender, EventArgs e)
