@@ -125,7 +125,27 @@ namespace MFilesEvent.Forms
 
         private void btnNew_Click(object sender, EventArgs e)
         {
+            Cursor = Cursors.WaitCursor;
 
+            //Set creation info details
+            var cr = new ObjectCreationInfo { DisallowTemplateSelection = false };
+            cr.SetObjectType(0, false);
+            cr.SetSingleFileDocument(true, false);
+            cr.SetMetadataCardTitle("Test");
+
+            //Show M-Files Dialog
+            var result = _loggedInVault.ObjectOperations.ShowNewObjectWindow(this.Handle, MFObjectWindowMode.MFObjectWindowModeInsert, cr);
+
+            if (result.Result != MFObjectWindowResultCode.MFObjectWindowResultCodeCancel)
+            {
+                //Check In the object & files
+                _loggedInVault.ObjectOperations.CheckIn(result.ObjVer);
+
+                //Reload documents list.
+                LoadDocuments();
+            }
+
+            Cursor = Cursors.Default;
 
         }
 
