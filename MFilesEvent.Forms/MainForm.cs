@@ -175,7 +175,7 @@ namespace MFilesEvent.Forms
 
         private void btnDocuments_Click(object sender, EventArgs e)
         {
-
+            LoadDocuments();
         }
 
         private void btnUser_Click(object sender, EventArgs e)
