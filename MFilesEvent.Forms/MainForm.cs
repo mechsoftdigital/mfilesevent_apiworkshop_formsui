@@ -22,12 +22,36 @@ namespace MFilesEvent.Forms
             InitializeComponent();
             _loggedInVault = loggedInVault;
             listView1.View = System.Windows.Forms.View.Details;
-   
+
+            listView1.MouseDoubleClick += listItemMouseDoubleClick;
+
         }
 
         private void listItemMouseDoubleClick(object sender, MouseEventArgs e)
         {
+            var senderList = (ListView)sender;
+            var clickedItem = senderList.HitTest(e.Location).Item;
+            if (clickedItem != null)
+            {
+                if (clickedItem.Tag != null)
+                {
+                    var si = clickedItem.Tag as SimpleInfo;
 
+                    if (si != null)
+                    {
+
+                        var o = new ObjID { ID = si.Id, Type = si.Type };
+
+                        var obj = _loggedInVault.ObjectOperations.GetLatestObjVer(o, true, false);
+
+                        var files = _loggedInVault.ObjectFileOperations.GetFiles(obj);
+
+                        _loggedInVault.ObjectFileOperations.OpenFileInDefaultApplication(this.Handle, obj, files[1].FileVer, MFFileOpenMethod.MFFileOpenMethodOpen);
+
+
+                    }
+                }
+            }
 
         }
 
