@@ -15,11 +15,12 @@ namespace MFilesEvent.Forms
 
     public partial class MainForm : Form
     {
+        private readonly Vault _loggedInVault;
 
-        public MainForm()
+        public MainForm(Vault loggedInVault)
         {
             InitializeComponent();
-
+            _loggedInVault = loggedInVault;
         }
 
         private void listItemMouseDoubleClick(object sender, MouseEventArgs e)
