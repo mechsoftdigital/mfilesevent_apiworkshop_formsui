@@ -37,7 +37,21 @@ namespace MFilesEvent.Forms
         private void btnLogin_Click(object sender, EventArgs e)
         {
             //TODO: Login to Vault
-            
+            if (listBox1.SelectedIndex != -1)
+            {
+                var connection = _connections.Where(x => x.Name == listBox1.SelectedItem.ToString()).FirstOrDefault();
+
+                if (connection != null)
+                {
+                    var vault = connection.BindToVault(this.Handle, true, true);
+
+                    if (vault != null)
+                    {
+                        var frm = new MainForm(vault);
+                        frm.ShowDialog();
+                    }
+                }
+            }
         }
     }
 }
