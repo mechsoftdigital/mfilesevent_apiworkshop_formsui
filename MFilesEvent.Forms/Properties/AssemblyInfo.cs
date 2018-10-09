@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MFilesEventApp.FormUI")]
+[assembly: AssemblyTitle("MFilesEvent.Forms")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MFilesEventApp.FormUI")]
+[assembly: AssemblyProduct("MFilesEvent.Forms")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("be563f76-6f9b-4554-9990-19c6dae9e1ee")]
+[assembly: Guid("062a9cb3-c2fa-48f3-8395-a191d7ee7871")]
 
 // Version information for an assembly consists of the following four values:
 //

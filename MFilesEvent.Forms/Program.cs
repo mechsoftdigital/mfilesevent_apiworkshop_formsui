@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MFilesEventApp.FormUI
+namespace MFilesEvent.Forms
 {
     static class Program
     {
@@ -16,7 +16,7 @@ namespace MFilesEventApp.FormUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new ChooseVault());
         }
     }
 }

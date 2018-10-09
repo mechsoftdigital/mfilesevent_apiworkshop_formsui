@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MFilesEventApp.FormUI.Properties
+namespace MFilesEvent.Forms.Properties
 {
 
 
